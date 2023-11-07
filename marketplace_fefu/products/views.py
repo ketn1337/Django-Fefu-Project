@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, get_object_or_404
 
 from .models import Product, Category
@@ -18,3 +19,8 @@ def category_detail(request, slug):
 
     return render(request, "category_detail.html", context=context)
     
+
+
+   
+
+
