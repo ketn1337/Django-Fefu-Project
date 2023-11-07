@@ -1,1 +1,52 @@
-RENAME FILE
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Маркетплейс ДВФУ</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="top-navbar">
+            <nav class="navbar">
+                <ul class="ul-navbar">
+                    <li>
+                        <a href=""><img></a>
+                    </li> <!-- TODO: add a logo image here -->
+                    <li>
+                        <a href="/index.html">Главная</a>
+                    </li>
+                </ul>
+            </nav>
+            <ul class="ul-navbar">
+                <li>
+                    <img>{{ goslings|default:"NaN" }} Гослингов &nbsp; <!-- TODO: add images --> 
+                </li>
+                <li>
+                    <a href="">Избранное</a> &nbsp; <!-- TODO: add links -->
+                </li>
+                <li>
+                    <a href=""><img> {{ first_name|default:"" }} {{ second_name|default:"" }} </a> <!-- TODO: add avatar parsed from vk-->
+                </li>
+                {% if first_name == "" %}
+                <li>
+                    <a href="">Войти</a> или <a href="">Зарегистрироваться</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="main-content">
+
+        </div>
+
+        <footer class="footer-main">
+            <ul class="ul-footer">
+                <li >
+                    Сайт-маркетплейс для студентов &nbsp;
+                </li>
+                <li>
+                    <a href="">Контакты</a>
+                </li>
+            </ul>
+        </footer>
+    </body>
+</html>
