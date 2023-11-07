@@ -1,1 +1,27 @@
-RENAME FILE
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Маркетплейс ДВФУ</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="top-navbar">
+            <nav class="navbar">
+                <ul class="ul-navbar">
+                    <li><a href="/index.html">Главная</a></li>
+                </ul>
+            </nav>
+            <div>
+                <img>{{ goslings|default:"NaN" }} Гослингов <!-- TODO: add images --> 
+            </div>
+            <div>
+                <a href="">Избранное</a> <!-- TODO: add links -->
+            </div>
+            <div>
+                <a href=""><img> {{ first_name }} {{ second_name }} </a>
+            <div>
+                <a href="">Войти</a> или <a href="">Зарегистрироваться</a>
+            </div>
+        </div>
+    </body>
+</html>

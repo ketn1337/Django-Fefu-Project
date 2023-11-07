@@ -1,0 +1,14 @@
+.navbar {
+    position: sticky;
+    background-color: #0067b1;
+    padding-right: auto;
+}
+
+.ul-navbar {
+    text-align: center;
+}
+
+.top-navbar {
+    display: flex;
+    flex-direction: row;
+}
