@@ -1,21 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
+class Vendor(models.Model):
+
+    user = models.OneToOneField(User, related_name='vendor', on_delete=models.CASCADE)
 
 
-class User(AbstractUser):
+    def get_balance(self):
+        items = self.items.filter(vendor_paid=False, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)
 
-    first_name = models.CharField(max_length=50)
-
-    last_name = models.CharField(max_length=50)
-
-    email = models.EmailField(
-        verbose_name="email address",
-        max_length=255,
-        unique=True,)
-
-    REQUIRED_FIELDS = ["first_name", "last_name", "email", "phone"]
-
-    address = models.TextField(max_length=200)
-
-    def __str__(self):
-        return self.email
+    def get_paid_amount(self):
+        items = self.items.filter(vendor_paid=True, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)
