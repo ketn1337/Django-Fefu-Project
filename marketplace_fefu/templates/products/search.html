@@ -5,21 +5,10 @@
         
         <div class="offers">
             <div class="categories">
-                <ul class="categories-list">
-                    {% for category in categories %}
-                    <li>
-                    <a href="{% url 'products:category' category.slug %}">
-                        {{category.title}}
-                    </a>
-                </li>
-                {% endfor %}
-                </ul>
+                {% include "core/categories.html" %}
             </div>
             <div class="search-posts">
-                <div class="search-bar">
-                    <input type="search" class="main-search" placeholder="Провести поиск по сайту..." autocomplete="off" spellcheck="false">
-                    <button class="search-button"><img>Поиск</button> <!-- TODO: add lupa image -->
-                </div>
+                {% include "core/searchbar.html" %}
                 <div class="posts">
                     <ul class="posts-list">
                         {% for posts in posts_list %} <!-- TODO: rename variable for backend -->
