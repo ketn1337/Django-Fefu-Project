@@ -69,8 +69,8 @@ class Product(models.Model):
     
     def unique_slug(self):
         unique_slug = slugify(self.title)
-        return '{}_{}'.format(unique_slug, self.id)
+        return '{}'.format(unique_slug)
     
     def get_absolute_url(self):
-        return reverse("product_detail", kwargs={str(self.slug)})
+        return reverse("product_detail", kwargs={'product_slug': self.slug})
     
