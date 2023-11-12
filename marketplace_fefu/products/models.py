@@ -27,7 +27,7 @@ class Category(models.Model):
     
     def unique_slug(self):
         unique_slug = slugify(self.title)
-        return '{}_{}'.format(unique_slug, self.id)
+        return '{}'.format(unique_slug)
     
     def save(self, *args, **kwargs):
         self.slug = self.unique_slug()
