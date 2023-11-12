@@ -1,25 +1,25 @@
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Product, Category
+from django.db.models import Q
 
-def product_detail(request, category_slug, slug):
+def category(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    return render(request, 'product/category.html', {'category': category})
 
-    prodict = get_object_or_404(Product, slug=slug)
 
-    context = {"product": prodict}
+def product(request, category_slug, product_slug):
+    pass
 
-    return render(request, "product_detail.html", context)
 
-def category_detail(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    products = category.products.all()
+def search(request):
+    query = request.GET.get('query', '')
+    products = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
 
-    context = {"category": category, "products" : products}
-
-    return render(request, "category_detail.html", context=context)
+    context = {'products': products, 'query': query}
     
-
+    return render(request, 'products/search.html', context)
 
    
 

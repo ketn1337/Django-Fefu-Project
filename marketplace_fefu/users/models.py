@@ -1,21 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(AbstractUser):
 
+    email = models.EmailField(max_length=254)
     first_name = models.CharField(max_length=50)
-
     last_name = models.CharField(max_length=50)
+    phone = PhoneNumberField()
+    
 
-    email = models.EmailField(
-        verbose_name="email address",
-        max_length=255,
-        unique=True,)
+    def __str__(self) -> str:
+        return self.username
 
-    REQUIRED_FIELDS = ["first_name", "last_name", "email", "phone"]
 
-    address = models.TextField(max_length=200)
+    def get_balance(self):
+        items = self.items.filter(vendor_paid=False, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)
 
-    def __str__(self):
-        return self.email
+    def get_paid_amount(self):
+        items = self.items.filter(vendor_paid=True, order__vendors__in=[self.id])
+        return sum((item.product.price * item.quantity) for item in items)

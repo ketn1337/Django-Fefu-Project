@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="main-content">
+        <!-- TODO: logo here? -->
+        
+        <div class="offers">
+            <div class="categories">
+                <ul class="categories-list">
+                    {% for categories in categories_list %} <!-- rename variable for backend -->
+                        <li>
+                            <a href="{{ categories_links }}">{{ categories|default:"error loading categories" }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="search-posts">
+                <div class="search-bar">
+                    <input type="search" class="main-search" placeholder="Провести поиск по сайту..." autocomplete="off" spellcheck="false">
+                    <button class="search-button"><img>Поиск</button> <!-- TODO: add lupa image -->
+                </div>
+                <div class="posts">
+                    <ul class="posts-list">
+                        {% for posts in posts_list %} <!-- TODO: rename variable for backend -->
+                            <div class="post-inner">
+                                <div class="post-photo">
+                                    <a href="{{ posts_links }}">{{ posts|default:"error loading post image" }}<img> <!-- TODO: image parse --> </a>
+                                </div>
+                                <div>
+                                    <div class="post-header">
+                                        <a href="{{ posts_links }}"><h3>{{ posts|default:"error loading post name" }}</h3></a>
+                                    </div>
+                                    <div class="post-short-desc">
+                                        <div class="post-price">
+                                            {{ posts|default:"error loading post price" }} ₽
+                                        </div>
+                                        <div class="post-location">
+                                            {{ posts|default:"error loading post location" }}
+                                        </div>
+                                        <div class="post-data">
+                                            {{ posts|default:"error loading post data" }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
