@@ -1,25 +1,10 @@
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 
 from .models import Product, Category
 
-def product_detail(request, category_slug, slug):
-
-    prodict = get_object_or_404(Product, slug=slug)
-
-    context = {"product": prodict}
-
-    return render(request, "product_detail.html", context)
-
-def category_detail(request, slug):
-    category = get_object_or_404(Category, slug=slug)
-    products = category.products.all()
-
-    context = {"category": category, "products" : products}
-
-    return render(request, "category_detail.html", context=context)
-    
-
+def index(request):
+    return HttpResponse("<html><body>hello</body></html>")
 
    
 
