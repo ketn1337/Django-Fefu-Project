@@ -16,9 +16,9 @@ def product(request, category_slug, product_slug):
 def search(request):
     query = request.GET.get('query', '')
     products = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+    categories = Category.objects.all()
+    context = {'products': products, 'query': query, 'categories': categories}
 
-    context = {'products': products, 'query': query}
-    
     return render(request, 'products/search.html', context)
 
    
