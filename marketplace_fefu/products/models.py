@@ -1,40 +1,52 @@
 from io import BytesIO
-from django.core.files import File
-from django.db import models
+from os import name
 from PIL import Image
+from django.core.files import File
 
+from django.db import models
+from users.models import Vendor
+from django.utils import timezone
 
 class Category(models.Model):
-    title = models.CharField(max_length=255, unique=True, blank=False)
-    slug = models.SlugField(max_length=255)
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=55)
     ordering = models.IntegerField(default=0)
 
+
     class Meta:
+        ordering = ['ordering']
         verbose_name_plural = "Categories"
-        ordering = ("ordering",)
-    
+
+
     def __str__(self):
         return self.title
     
 
 class Product(models.Model):
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, null=True)
+    vendor = models.ForeignKey(Vendor, related_name="products", on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=50, default="product")
 
-   class Product(models.Model):
-    category = models.ForeignKey(
-        Category, related_name="products", on_delete=models.CASCADE
-    )
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(null=True, max_length=55)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatField()
-    is_featured = models.BooleanField(default=False)
-
-    image = models.ImageField(upload_to="media/uploads/", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="media/uploads/", blank=True, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+    
+    price = models.DecimalField(default=0 ,max_digits=6, decimal_places=2)
+    add_date = models.DateTimeField(default=timezone.now)
+    change_date = models.DateTimeField(default=timezone.now)
+    
+    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
     class Meta:
-        ordering = ("-date_added",)
+        ordering = ['-add_date']
+
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.add_date = timezone.now()
+        self.change_date = timezone.now()
+        return super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+    

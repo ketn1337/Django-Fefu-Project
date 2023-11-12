@@ -5,6 +5,9 @@ class Vendor(models.Model):
 
     user = models.OneToOneField(User, related_name='vendor', on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return super().__str__()
+
 
     def get_balance(self):
         items = self.items.filter(vendor_paid=False, order__vendors__in=[self.id])
