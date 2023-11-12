@@ -2,7 +2,8 @@
 <html>
     <head>
         <title>Маркетплейс ДВФУ</title>
-        <link rel="stylesheet" href="style.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/style.css' %}">
     </head>
     <body>
         <div class="top-navbar">
@@ -18,7 +19,7 @@
             </nav>
             <ul class="ul-navbar">
                 <li>
-                    <img>{{ goslings|default:"NaN" }} Гослингов &nbsp; <!-- TODO: add images --> 
+                   <!-- <img>{{ goslings|default:"NaN" }} Гослингов &nbsp; --> <!-- TODO: add images --> 
                 </li>
                 <li>
                     <a href="">Избранное</a> &nbsp; <!-- TODO: add links -->
