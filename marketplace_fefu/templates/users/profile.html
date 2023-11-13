@@ -1,0 +1,109 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="profile">
+        <div class="nav-profile">
+            <div>
+                <div id="avatar-photo">
+                    Фото
+                </div>
+                <div id="name">
+                    Имя Фамилия
+                </div>
+                <div id="city-id">
+                    Город | id
+                </div>
+            </div>
+            <ul id="advertisement-info">
+                <li>
+                    <ul class="category">
+                        <li>
+                            <b>Мои объявления</b>
+                        </li>
+                        <li>
+                            Актуальные
+                        </li>
+                        <li>
+                            Архив
+                        </li>
+                        <li>
+                            Все объявления
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="category">
+                        <li>
+                            <b>Покупки и избранное</b>
+                        </li>
+                        <li>
+                            Избранное
+                        </li>
+                        <li>
+                            Купленное
+                        </li>
+                        <li>
+                            Подписки
+                        </li>
+                    </ul>
+                </li>
+                <li class="category">
+                    Сообщения
+                </li>
+                <li>
+                    <ul class="category">
+                        <li>
+                            <b>Мой профиль</b>
+                        </li>
+                        <li>
+                            Настройки профиля
+                        </li>
+                        <li>
+                            Моя страница
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="advertisement">
+            <div id="advertisement-header">
+                <b>Объявления</b>
+            </div>
+            {% if !is_advertisement %}
+                <span id="is-advertisement">
+                    Объявлений нет.
+                </span>
+            {% else %}
+                {% for %}
+                    <div class="ad">
+                        <div>
+                            <div id="ad-date">  
+                                'Число Месяц Год' в 'Час':'Минуты'
+                            </div>
+                            <div id="ad-name">
+                                'Название товара'
+                            </div>
+                        </div>
+                        <div class="ad-info-with-photo">
+                            <div class="ad-info">
+                                <div id="price">
+                                    'Цена' руб.
+                                </div>
+                                <div id="description">
+                                    'Описание'
+                                </div>
+                                <div id="delivery-payment">
+                                    'Доставка и оплата'
+                                </div>
+                            </div>
+                            <div class="ad-photo-dir">
+                                <div id="ad-photo">
+                                    Photo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
