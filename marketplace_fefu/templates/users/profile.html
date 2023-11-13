@@ -4,13 +4,13 @@
         <div class="nav-profile">
             <div>
                 <div id="avatar-photo">
-                    Фото
+                    {{ avatar_photo }}
                 </div>
                 <div id="name">
-                    Имя Фамилия
+                    {{ full_name }}
                 </div>
                 <div id="city-id">
-                    Город | id
+                    {{ city_and_id }}
                 </div>
             </div>
             <ul id="advertisement-info">
@@ -75,30 +75,29 @@
             {% else %}
                 {% for %}
                     <div class="ad">
-                        <div>
-                            <div id="ad-date">  
-                                'Число Месяц Год' в 'Час':'Минуты'
+                    <div>
+                        <div id="ad-date">  
+                            {{ date }} в {{ hour }}:{{ min }}
+                        </div>
+                        <div id="ad-name">
+                            {{ product_name }}
+                        </div>
+                    </div>
+                    <div class="ad-info-with-photo">
+                        <div class="ad-info">
+                            <div id="price">
+                                {{ price }} руб.
                             </div>
-                            <div id="ad-name">
-                                'Название товара'
+                            <div id="description">
+                                {{ decription }}
+                            </div>
+                            <div id="delivery-payment">
+                                {{ delivery_and_payment }}
                             </div>
                         </div>
-                        <div class="ad-info-with-photo">
-                            <div class="ad-info">
-                                <div id="price">
-                                    'Цена' руб.
-                                </div>
-                                <div id="description">
-                                    'Описание'
-                                </div>
-                                <div id="delivery-payment">
-                                    'Доставка и оплата'
-                                </div>
-                            </div>
-                            <div class="ad-photo-dir">
-                                <div id="ad-photo">
-                                    Photo
-                                </div>
+                        <div class="ad-photo-dir">
+                            <div id="ad-photo">
+                                {{ product_photo }}
                             </div>
                         </div>
                     </div>
