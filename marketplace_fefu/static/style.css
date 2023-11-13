@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    padding: 0;
     height: 100%;
 }
 
@@ -217,4 +218,169 @@ body {
     flex-direction: row;
     margin-bottom: 50px;
     min-height: 210px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    flex-grow: 1;
+    padding: 20px 10px 20px 10px;
+    line-height: 24px;
+}
+
+.nav-profile {
+    width: 15%;
+    --background-color: yellow;
+}
+
+.advertisement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+    --background-color: gray;
+}
+
+#advertisement-header {
+    font-size: 32px;
+    padding-top: 20px;
+}
+
+#is-advertisement {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#avatar-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    font-size: 20px;
+}
+
+#name {
+    font-size: 20px;
+}
+
+#city-id {
+    font-size: 20px;
+}
+
+#advertisement-info {
+    font-size: 15px;
+}
+
+.ad {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgb(211, 211, 211);
+    width: 90%;
+    padding: 10px 10px 10px 10px;
+    margin-top: 20px;
+}
+
+.category {
+    padding: 12px 0;
+    margin: 0;
+    border-top: 1px solid gray; 
+}
+
+#ad-date {
+    font-size: 12px;
+}
+
+#ad-name {
+    font-size: 20px;
+}
+
+.ad-info-with-photo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.ad-info {
+    
+    width: 70%;
+}
+
+#price {
+    font-size: 24px;
+}
+
+#description {
+    font-size: 16px;
+}
+
+#delivery-payment {
+    font-size: 16px;    
+}
+
+.ad-photo-dir {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+#ad-photo {
+    
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.product-info-cmbk {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.cmbk {
+    margin-top: 30px;
+}
+
+#alert {
+    font-size: 20px;
+}
+
+#button {
+    border: 2px solid gray;
+    width: 25%;
+    font-size: 20px;
+    padding: 5px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.product-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.settings {
+    line-height: 24px;
+    padding: 0 5px;
+}
+
+#change {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+
+#delete {
+    border-bottom: 1px solid lightgray;
 }

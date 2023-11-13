@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .decorators import user_not_authenticated
 from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm
 
+
 @user_not_authenticated
 def register(request):
     if request.user.is_authenticated:
