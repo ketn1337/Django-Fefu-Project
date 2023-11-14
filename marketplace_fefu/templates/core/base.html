@@ -27,9 +27,12 @@
                 <li>
                     <a href=""><img> {{ first_name|default:"" }} {{ second_name|default:"" }} </a> <!-- TODO: add avatar parsed from vk-->
                 </li>
-                {% if first_name == "" %}
+                {% if request.user.is_authenticated %}
                 <li>
-                    <a href="">Войти</a> или <a href="">Зарегистрироваться</a>
+                    <a href="{% url "users:profile" request.user.username %}">Профиль</a>
+                {% else %}
+                    <a href="{% url "users:login" %}">Log-in</a>
+                    <a href="{% url "users:register" %}">Reg</a>
                 </li>
                 {% endif %}
             </ul>

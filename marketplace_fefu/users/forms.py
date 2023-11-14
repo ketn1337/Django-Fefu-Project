@@ -9,14 +9,21 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'image', 'title', 'description', 'price']
+    
+    def save(self, commit=True):
+        product = super(ProductForm, self).save(commit=False)
+        if self.cleaned_data['image']:
+
+            product.image = self.cleaned_data['image']
+            product.save()
+        return product
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(help_text='A valid email address, please.', required=True)
 
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username','vk', 'email', 'password1', 'password2']
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
@@ -43,5 +50,5 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'email', 'phone']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'vk']
 
