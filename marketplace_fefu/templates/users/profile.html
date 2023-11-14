@@ -19,13 +19,13 @@
                         <li>
                             <b>Мои объявления</b>
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Актуальные
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Архив
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Все объявления
                         </li>
                     </ul>
@@ -35,29 +35,31 @@
                         <li>
                             <b>Покупки и избранное</b>
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Избранное
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Купленное
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Подписки
                         </li>
                     </ul>
                 </li>
                 <li class="category">
-                    Сообщения
+                    <span class="profile-settings">
+                        Сообщения
+                    </span>
                 </li>
                 <li>
                     <ul class="category">
                         <li>
                             <b>Мой профиль</b>
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Настройки профиля
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Моя страница
                         </li>
                     </ul>
@@ -69,9 +71,14 @@
                 <b>Объявления</b>
             </div>
             {% if !is_advertisement %}
-                <span id="is-advertisement">
-                    Объявлений нет.
-                </span>
+                <div class="ad-button">
+                        <span id="is-advertisement">
+                            Объявлений нет
+                        </span>
+                        <div id="create-ad">
+                            Создать объявление
+                        </div>
+                    </div>
             {% else %}
                 {% for %}
                     <div class="ad">
