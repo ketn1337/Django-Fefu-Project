@@ -2,13 +2,14 @@
 {% block content %}
 
 <form method="post">
-    <label for="first-name">Имя</label>
-    <input type="text" name="fist-name" id="first-name" required />
-    <label for="second-name">Фамилия</label>
-    <input type="text" name="second-name" id="second-name" required />
-    <label for="email">Почта</label>
-    <input type="email" name="email" id="email" required />
-    <button type="submit">Зарегистрироваться</button>
+    {% csrf_token %}
+    <h2>Log in</h2>
+    {% for field in form %}
+	<p>
+	 	{{ field.label_tag }} {{ field }}
+	</p>
+	{% endfor %}
+	<input type="submit" value="Log in" />
 </form>
 
 {% endblock %}

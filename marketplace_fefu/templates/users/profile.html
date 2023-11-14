@@ -4,13 +4,18 @@
         <div class="nav-profile">
             <div>
                 <div id="avatar-photo">
-                    {{ avatar_photo }}
+                    avatar_photo
                 </div>
-                <div id="name">
-                    {{ full_name }}
+                <div id="name"> <!-- username-->
+                    {{ request.user.username }}
                 </div>
+                <!-- first_name-->
                 <div id="city-id">
-                    {{ city_and_id }}
+                    {{request.user.first_name}}
+                </div>
+                <!-- last_name-->
+                <div id="city-id">
+                    {{request.user.last_name}}
                 </div>
             </div>
             <ul id="advertisement-info">
@@ -20,7 +25,7 @@
                             <b>Мои объявления</b>
                         </li>
                         <li>
-                            Актуальные
+                            <a href="{% url "users:create_product" request.user.username %}?next={{request.path}}"><b>Добавить товар</b></a>
                         </li>
                         <li>
                             Архив
@@ -33,26 +38,7 @@
                 <li>
                     <ul class="category">
                         <li>
-                            <b>Покупки и избранное</b>
-                        </li>
-                        <li>
-                            Избранное
-                        </li>
-                        <li>
-                            Купленное
-                        </li>
-                        <li>
-                            Подписки
-                        </li>
-                    </ul>
-                </li>
-                <li class="category">
-                    Сообщения
-                </li>
-                <li>
-                    <ul class="category">
-                        <li>
-                            <b>Мой профиль</b>
+                            <a href="{% url "users:profile" request.user.username %}"><b>Мой профиль</b></a>
                         </li>
                         <li>
                             Настройки профиля
@@ -68,41 +54,34 @@
             <div id="advertisement-header">
                 <b>Объявления</b>
             </div>
-            {% if !is_advertisement %}
-                <span id="is-advertisement">
-                    Объявлений нет.
-                </span>
-            {% else %}
-                {% for %}
                     <div class="ad">
                     <div>
                         <div id="ad-date">  
-                            {{ date }} в {{ hour }}:{{ min }}
+                            date в  hour : min 
                         </div>
                         <div id="ad-name">
-                            {{ product_name }}
+                            product_name
                         </div>
                     </div>
                     <div class="ad-info-with-photo">
                         <div class="ad-info">
                             <div id="price">
-                                {{ price }} руб.
+                                price  руб.
                             </div>
                             <div id="description">
-                                {{ decription }}
+                                 decription
                             </div>
                             <div id="delivery-payment">
-                                {{ delivery_and_payment }}
+                                delivery_and_payment
                             </div>
                         </div>
                         <div class="ad-photo-dir">
                             <div id="ad-photo">
-                                {{ product_photo }}
+                                product_photo
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            {% endif %}
+                    <a href="{% url 'users:logout'%}"><h3>Log out</h3></a>
         </div>
     </div>
 {% endblock %}

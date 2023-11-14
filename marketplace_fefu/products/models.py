@@ -3,7 +3,7 @@ from os import name
 from PIL import Image
 from django.core.files import File
 from pytils.translit import slugify
-
+from django.core.validators import MinValueValidator
 
 from django.db import models
 from users.models import User
@@ -46,12 +46,17 @@ class Product(models.Model):
     slug = models.SlugField(null=True, max_length=55)
     description = models.TextField(blank=True, null=True)
     
-    price = models.DecimalField(default=0 ,max_digits=6, decimal_places=2)
+    price = models.DecimalField(
+        default=0,
+        max_digits=6,
+        decimal_places=2,
+        validators = [MinValueValidator(0)]
+        )
+    
     add_date = models.DateTimeField(default=timezone.now)
     change_date = models.DateTimeField(default=timezone.now)
     
-    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
-    thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    image = models.ImageField(upload_to='products', blank=True, null=True, unique=True)
 
     class Meta:
         ordering = ['-add_date']
@@ -69,7 +74,7 @@ class Product(models.Model):
     
     def unique_slug(self):
         unique_slug = slugify(self.title)
-        return '{}'.format(unique_slug)
+        return '{}_{}'.format(unique_slug, self.pk)
     
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={'product_slug': self.slug})
