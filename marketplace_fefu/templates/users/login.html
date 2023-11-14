@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<form method="post">
+    <label for="first-name">Имя</label>
+    <input type="text" name="fist-name" id="first-name" required />
+    <label for="second-name">Фамилия</label>
+    <input type="text" name="second-name" id="second-name" required />
+    <label for="email">Почта</label>
+    <input type="email" name="email" id="email" required />
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+{% endblock %}
