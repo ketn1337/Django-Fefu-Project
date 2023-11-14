@@ -282,10 +282,13 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: rgb(211, 211, 211);
+    background-color: #0067b1;
     width: 90%;
     padding: 10px 10px 10px 10px;
     margin-top: 20px;
+    border: 4px solid #aed6ff;
+    border-radius: 10px;
+    color: white;
 }
 
 .category {
@@ -383,4 +386,26 @@ ul {
 
 #delete {
     border-bottom: 1px solid lightgray;
+}
+
+.ad-button {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-left: 30px;
+}
+
+#create-ad {
+    border: 3px solid #aed6ff;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 18px;
+    color: white;
+    background-color: #0067b1;
+}
+
+.profile-settings {
+    color: #0067b1;
 }
