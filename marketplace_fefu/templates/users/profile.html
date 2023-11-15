@@ -14,6 +14,7 @@
                 </div>
                 <div id="city-id">
                     Last_Name &nbsp; {{request.user.last_name}}
+
                 </div>
             </div>
             <ul id="advertisement-info">
@@ -51,6 +52,7 @@
         <div class="advertisement">
             <div id="advertisement-header">
                 <b>Объявления</b>
+
                 {% for product in products %}
                     <div class="ad">
                     <div>
@@ -68,6 +70,7 @@
                             </div>
                             <div id="description">
                                  {{product.description}}
+
                             </div>
                         </div>
                         <div class="ad-photo-dir">
@@ -79,4 +82,5 @@
                     {% endfor %}
 
                 </div>
+
 {% endblock %}
