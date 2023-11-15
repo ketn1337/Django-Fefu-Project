@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
+
 from django.contrib.auth import login, get_user_model, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from products.models import Product
 
 from .decorators import user_not_authenticated
 from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, ProductForm
@@ -69,21 +71,29 @@ def profile(request, username):
            
             return redirect("profile", user_form.username)
 
-    user = get_user_model().objects.filter(username=username).first()
-    if user:
-        form = UserUpdateForm(instance=user)
-        return render(
-            request=request,
-            template_name="users/profile.html",
-            context={"form": form}
-            )
+        
+        user = get_user_model().objects.filter(username=username).first()
+
+        if user:
+            form = UserUpdateForm(instance=user)
+
+            return render(
+                request=request,
+                template_name="users/profile.html",
+                context={"form": form}
+                )
     
     return redirect("/")
 
-
-def create_product(request, username):
+def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            product.save()
+            previous_page = request.GET.get('next', '')
+            return HttpResponseRedirect(previous_page)
+
         
         if form.is_valid():
             product = form.save()

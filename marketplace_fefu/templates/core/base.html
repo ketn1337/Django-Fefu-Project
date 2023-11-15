@@ -19,9 +19,6 @@
             </nav>
             <ul class="ul-navbar">
                 <li>
-                    <img>{{ goslings|default:"NaN" }} Гослингов &nbsp; <!-- TODO: add images --> 
-                </li>
-                <li>
                     <a href="">Избранное</a> &nbsp; <!-- TODO: add links -->
                 </li>
                 <li>
@@ -31,7 +28,8 @@
                 <li>
                     <a href="{% url "users:profile" request.user.username %}">Профиль</a>
                 {% else %}
-                    <a href="{% url "users:login" %}">Log-in</a>
+                    <a href="{% url "users:login" %}">Log-in &nbsp;</a>
+          
                     <a href="{% url "users:register" %}">Reg</a>
                 </li>
                 {% endif %}
