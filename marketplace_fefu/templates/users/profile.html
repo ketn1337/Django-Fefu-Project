@@ -4,13 +4,17 @@
         <div class="nav-profile">
             <div>
                 <div id="avatar-photo">
-                    {{ avatar_photo }}
                 </div>
-                <div id="name">
-                    {{ full_name }}
+                <div id="name"> <!-- username-->
+                    Login &nbsp; {{ request.user.username }}
+                </div>
+                <!-- first_name-->
+                <div id="city-id">
+                    First_Name &nbsp; {{request.user.first_name}}
                 </div>
                 <div id="city-id">
-                    {{ city_and_id }}
+                    Last_Name &nbsp; {{request.user.last_name}}
+
                 </div>
             </div>
             <ul id="advertisement-info">
@@ -19,8 +23,8 @@
                         <li>
                             <b>Мои объявления</b>
                         </li>
-                        <li class="profile-settings">
-                            Актуальные
+                        <li>
+                            <a href="{% url "users:create_product" request.user.username %}?next={{request.path}}"><b>Добавить товар</b></a>
                         </li>
                         <li class="profile-settings">
                             Архив
@@ -33,34 +37,13 @@
                 <li>
                     <ul class="category">
                         <li>
-                            <b>Покупки и избранное</b>
-                        </li>
-                        <li class="profile-settings">
-                            Избранное
-                        </li>
-                        <li class="profile-settings">
-                            Купленное
-                        </li>
-                        <li class="profile-settings">
-                            Подписки
-                        </li>
-                    </ul>
-                </li>
-                <li class="category">
-                    <span class="profile-settings">
-                        Сообщения
-                    </span>
-                </li>
-                <li>
-                    <ul class="category">
-                        <li>
-                            <b>Мой профиль</b>
+                            <a href="{% url "users:profile" request.user.username %}"><b>Мой профиль</b></a>
                         </li>
                         <li class="profile-settings">
                             Настройки профиля
                         </li>
-                        <li class="profile-settings">
-                            Моя страница
+                        <li>
+                            <a href="{% url 'users:logout'%}"><h3>Log out</h3></a>
                         </li>
                     </ul>
                 </li>
@@ -69,47 +52,35 @@
         <div class="advertisement">
             <div id="advertisement-header">
                 <b>Объявления</b>
-            </div>
-            {% if !is_advertisement %}
-                <div class="ad-button">
-                        <span id="is-advertisement">
-                            Объявлений нет
-                        </span>
-                        <div id="create-ad">
-                            Создать объявление
-                        </div>
-                    </div>
-            {% else %}
-                {% for %}
+
+                {% for product in products %}
                     <div class="ad">
                     <div>
                         <div id="ad-date">  
-                            {{ date }} в {{ hour }}:{{ min }}
+                            {{product.add_date}}
                         </div>
                         <div id="ad-name">
-                            {{ product_name }}
+                            {{product.title}}
                         </div>
                     </div>
                     <div class="ad-info-with-photo">
                         <div class="ad-info">
                             <div id="price">
-                                {{ price }} руб.
+                                {{product.price}}  руб.
                             </div>
                             <div id="description">
-                                {{ decription }}
-                            </div>
-                            <div id="delivery-payment">
-                                {{ delivery_and_payment }}
+                                 {{product.description}}
+
                             </div>
                         </div>
                         <div class="ad-photo-dir">
                             <div id="ad-photo">
-                                {{ product_photo }}
+                                product_photo
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+                    {% endfor %}
+
+                </div>
+
 {% endblock %}

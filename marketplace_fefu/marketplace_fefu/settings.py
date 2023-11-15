@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'products.apps.ProductsConfig',
-    'orders.apps.OrdersConfig',
     'phonenumber_field',
 ]
 

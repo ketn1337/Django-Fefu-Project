@@ -14,7 +14,6 @@
                         {% for product in category.products.all %} <!-- TODO: rename variable for backend -->
                             <div class="post-inner">
                                 <div class="post-photo">
-                                    <a href="{{ posts_links }}">{{ posts|default:"error loading post image" }}<img> <!-- TODO: image parse --> </a>
                                 </div>
                                 <div>
                                     <div class="post-header">
@@ -25,7 +24,6 @@
                                             {{ product.price }} ₽
                                         </div>
                                         <div class="post-location">
-                                            {{ posts|default:"error loading post location" }}
                                         </div>
                                         <div class="post-data">
                                             {{ product.add_date }}
