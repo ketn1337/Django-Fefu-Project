@@ -3,7 +3,8 @@ from django.contrib.auth import login, get_user_model, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-
+from .models import User
+from products.models import Product
 from .decorators import user_not_authenticated
 from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, ProductForm
 
@@ -72,10 +73,11 @@ def profile(request, username):
     user = get_user_model().objects.filter(username=username).first()
     if user:
         form = UserUpdateForm(instance=user)
+        products = Product.objects.filter(vendor=user).all()
         return render(
             request=request,
             template_name="users/profile.html",
-            context={"form": form}
+            context={"form": form, 'products': products}
             )
     
     return redirect("/")

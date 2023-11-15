@@ -11,7 +11,9 @@ def category(request, category_slug):
 
 
 def product(request, category_slug, product_slug):
-    pass
+    product = get_object_or_404(Product, slug=product_slug)
+    context = {'product': product}
+    return render(request, 'products/product_detail.html', context)
 
 
 def search(request):
