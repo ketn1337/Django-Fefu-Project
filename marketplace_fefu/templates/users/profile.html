@@ -26,10 +26,10 @@
                         <li>
                             <a href="{% url "users:create_product" request.user.username %}?next={{request.path}}"><b>Добавить товар</b></a>
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Архив
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Все объявления
                         </li>
                     </ul>
@@ -39,7 +39,7 @@
                         <li>
                             <a href="{% url "users:profile" request.user.username %}"><b>Мой профиль</b></a>
                         </li>
-                        <li>
+                        <li class="profile-settings">
                             Настройки профиля
                         </li>
                         <li>
