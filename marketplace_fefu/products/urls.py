@@ -2,8 +2,11 @@ from django.urls import path
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from users.views import buy_product
 from . import views
+
+from django.views.generic.base import RedirectView
+
 app_name = 'products'
 
 urlpatterns = [

@@ -24,6 +24,6 @@ def search(request):
 
     return render(request, 'products/search.html', context)
 
-   
+
 
 

@@ -4,18 +4,16 @@
         <div class="nav-profile">
             <div>
                 <div id="avatar-photo">
-                    avatar_photo
                 </div>
                 <div id="name"> <!-- username-->
-                    {{ request.user.username }}
+                    Login &nbsp; {{ request.user.username }}
                 </div>
                 <!-- first_name-->
                 <div id="city-id">
-                    {{request.user.first_name}}
+                    First_Name &nbsp; {{request.user.first_name}}
                 </div>
-                <!-- last_name-->
                 <div id="city-id">
-                    {{request.user.last_name}}
+                    Last_Name &nbsp; {{request.user.last_name}}
                 </div>
             </div>
             <ul id="advertisement-info">
@@ -44,7 +42,7 @@
                             Настройки профиля
                         </li>
                         <li>
-                            Моя страница
+                            <a href="{% url 'users:logout'%}"><h3>Log out</h3></a>
                         </li>
                     </ul>
                 </li>
@@ -80,6 +78,5 @@
                     </div>
                     {% endfor %}
 
-                    <a href="{% url 'users:logout'%}"><h3>Log out</h3></a>
                 </div>
 {% endblock %}
