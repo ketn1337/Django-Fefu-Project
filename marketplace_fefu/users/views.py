@@ -59,39 +59,40 @@ def cust_login(request):
         context={'form': form}
     )
 
-def profile(request,  username):
-    if request.method == 'POST':
+def profile(request, username):
+    if request.method == "POST":
         user = request.user
-        form =  form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             user_form = form.save()
+
             return redirect("profile", user_form.username)
         
         for error in list(form.errors.values()):
             messages.error(request, error)
 
         
-        user = get_user_model().objects.filter(username=username).first()
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        return render(
+            request=request,
+            template_name="users/profile.html",
+            context={"form": form}
+            )
 
-        if user:
-            form = UserUpdateForm(instance=user)
-
-            return render(
-                request=request,
-                template_name="users/profile.html",
-                context={"form": form}
-                )
-    
     return redirect("/")
 
 
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+
         if form.is_valid():
             product = form.save()
             product.save()
-            previous_page = request.GET.get('next', '')
-            return HttpResponseRedirect(previous_page)
+            previous_page = request.GET.get('next') if request.GET.get('next') is not None else ''
+            return redirect(previous_page) if previous_page != '' else redirect('/')
 
-        
+    form = ProductForm()
+    return render(request, 'users/create_product.html', {'form': form})
