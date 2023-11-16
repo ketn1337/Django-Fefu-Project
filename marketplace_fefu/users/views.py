@@ -72,28 +72,20 @@ def profile(request, username):
             return redirect("profile", user_form.username)
 
         
-        user = get_user_model().objects.filter(username=username).first()
+    user = get_user_model().objects.filter(username=username).first()
+    if user:
+        form = UserUpdateForm(instance=user)
+        return render(
+            request=request,
+            template_name="users/profile.html",
+            context={"form": form}
+            )
 
-        if user:
-            form = UserUpdateForm(instance=user)
-
-            return render(
-                request=request,
-                template_name="users/profile.html",
-                context={"form": form}
-                )
-    
     return redirect("/")
 
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
-            product.save()
-            previous_page = request.GET.get('next', '')
-            return HttpResponseRedirect(previous_page)
-
         
         if form.is_valid():
             product = form.save()
@@ -103,10 +95,3 @@ def create_product(request):
     
     form = ProductForm()
     return render(request, 'users/create_product.html', {'form': form})
-
-
-def buy_product(request, product_slug):
-    product = get_object_or_404(request, product_slug)
-    vk = product.vendor.vk
-    product.delete()
-    return redirect(f'{vk}')
