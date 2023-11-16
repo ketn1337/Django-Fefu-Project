@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
+
 from django.contrib.auth import login, get_user_model, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,14 +13,14 @@ from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, ProductF
 @user_not_authenticated
 def register(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect("profile/" + request.user.username)
     
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            redirect('/')
+            return redirect("profile/"+request.user.username)
     
     else:
         form = UserRegistrationForm()
@@ -47,7 +48,8 @@ def cust_login(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect('/')
+                username = user.get_username()
+                return redirect("profile/" + request.user.username)
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
@@ -59,17 +61,15 @@ def cust_login(request):
         context={'form': form}
     )
 
+
 def profile(request, username):
     if request.method == "POST":
         user = request.user
         form = UserUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             user_form = form.save()
-
+           
             return redirect("profile", user_form.username)
-        
-        for error in list(form.errors.values()):
-            messages.error(request, error)
 
         
     user = get_user_model().objects.filter(username=username).first()
@@ -83,16 +83,15 @@ def profile(request, username):
 
     return redirect("/")
 
-
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
-
+        
         if form.is_valid():
             product = form.save()
             product.save()
             previous_page = request.GET.get('next') if request.GET.get('next') is not None else ''
             return redirect(previous_page) if previous_page != '' else redirect('/')
-
+    
     form = ProductForm()
     return render(request, 'users/create_product.html', {'form': form})

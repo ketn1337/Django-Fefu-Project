@@ -29,6 +29,7 @@
                     <a href="{% url "users:profile" request.user.username %}">Профиль</a>
                 {% else %}
                     <a href="{% url "users:login" %}">Log-in &nbsp;</a>
+          
                     <a href="{% url "users:register" %}">Reg</a>
                 </li>
                 {% endif %}
