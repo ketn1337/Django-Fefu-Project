@@ -39,7 +39,7 @@ def buy_product(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
     user = request.user
     vendor = product.vendor
-    if user.balance >= product.price:
+    if user.balance >= product.price and vendor.username != user.username:
         user.balance -= product.price
         user.save()
         vendor.balance += product.price
