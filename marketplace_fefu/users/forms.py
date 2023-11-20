@@ -13,7 +13,6 @@ class ProductForm(ModelForm):
     def save(self, commit=True):
         product = super(ProductForm, self).save(commit=False)
         if self.cleaned_data['image']:
-
             product.image = self.cleaned_data['image']
             product.save()
         return product

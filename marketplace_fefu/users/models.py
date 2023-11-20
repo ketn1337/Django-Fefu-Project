@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
-from pytils.translit import slugify
+
 
 from django.urls import reverse
 
@@ -13,6 +13,7 @@ class User(AbstractUser):
     phone = PhoneNumberField()
     vk = models.CharField(max_length=255, blank=False, null=False)
     image = models.ImageField(upload_to='users', blank=True, null=True)
+    balance = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.username
