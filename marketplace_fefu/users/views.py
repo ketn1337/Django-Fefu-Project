@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from products.models import Product
+from .models import User
 
 from .decorators import user_not_authenticated
 from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, ProductForm
@@ -63,32 +64,27 @@ def cust_login(request):
 
 
 def profile(request, username):
-    if request.method == "POST":
-        user = request.user
-        form = UserUpdateForm(request.POST, request.FILES, instance=user)
-        if form.is_valid():
-            user_form = form.save()
-           
-            return redirect("profile", user_form.username)
-
-        
-    user = get_user_model().objects.filter(username=username).first()
+    user = User.objects.get(username=username)
+    if user.username != request.user.username:
+        return redirect('/')
     if user:
-        form = UserUpdateForm(instance=user)
+        products = user.products.all()
+        
         return render(
             request=request,
             template_name="users/profile.html",
-            context={"form": form}
+            context={'products': products}
             )
 
     return redirect("/")
 
-def create_product(request):
+def create_product(request, username):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         
         if form.is_valid():
             product = form.save()
+            product.vendor = request.user
             product.save()
             previous_page = request.GET.get('next') if request.GET.get('next') is not None else ''
             return redirect(previous_page) if previous_page != '' else redirect('/')
