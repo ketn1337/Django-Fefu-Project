@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+{% block content %}
+	<div class="create-product">
+	    <div class="cr-pr">
+		<div class="create-product-h">
+		    Выберите категорию
+		</div>
+		<div id="choose-category">
+		    <select class="choose-category-select">
+			<option selected disabled>
+			    Категории
+			</option>
+			<option value="Еда">
+			    Еда
+			</option>
+			<option value="Электроприборы">
+			    Электроприборы
+			</option>
+			<option value="Бытовые товары">
+			    Бытовые товары
+			</option>
+			<option value="Услуги">
+			    Услуги
+			</option>
+		    </select>
+		</div>
+		<div class="create-product-h">
+		    Информация о товаре
+		</div>
+		<div class="ad-main-content-block">
+		    <div class="info-h">
+			Название товара
+		    </div>
+		    <input type="text" id="info-bar-product-name">
+		    <div class="info-h">
+			Цена
+		    </div>
+		    <div id="info-ad-price">
+			<input type="text" id="info-bar-product-price">
+			<div id="ruble">
+			    ₽
+			</div>
+		    </div>
+		    <div class="info-h">
+			Текст объявления
+		    </div>
+		    <textarea type="text" id="info-bar-product-description" wrap="soft"></textarea>
+		</div>
+		<div class="create-product-h">
+		    Условия продажи
+		</div>
+		<div class="ad-main-content-block">
+		    <div class="info-h">
+			Доставка
+		    </div>
+		    <input type="text" class="info-bar-product-sales-conditions">
+		    <div class="info-h">
+			Оплата
+		    </div>
+		    <input type="text" class="info-bar-product-sales-conditions">
+		    <div class="info-h">
+			Контакты
+		    </div>
+		    <input type="text" class="info-bar-product-sales-conditions">
+		</div>
+		<form action="{% url 'products:search' %}" class="cr-pr-button">
+		    <button class="universal-button">
+			Создать
+		    </button>
+		</form>
+	    </div>
+	</div>
+{% endblock %}

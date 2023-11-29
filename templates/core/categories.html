@@ -1,0 +1,11 @@
+{% block content %}
+    <ul class="categories-list">
+        {% for category in categories %}
+        <li {%if category.slug == category_slug%} {%endif%}> <!-- add class=bg gray between if endif-->
+            <a href="{% url 'products:search'%}?query={{query}}&category={{category.slug}}">
+                {{category.title}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

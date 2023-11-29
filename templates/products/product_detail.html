@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block content %}
+<p>{{product.title}}</p>
+<p>{{product.add_date}}</p>
+<p>{{product.price}}</p>
+<p>{{product.description}}</p>
+{% if request.user.is_authenticated and request.user != product.vendor %}
+<form action="{% url 'products:buy_product' product.slug %} " method="post">
+    {% csrf_token %}
+    <input type="submit" value="Купить">
+</form>
+{% endif %}
+                            
+
+{% endblock %}

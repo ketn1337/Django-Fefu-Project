@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="main-content">
+        <!-- TODO: logo here? -->
+        
+        <div class="offers">
+            <div class="categories">
+                {% include "core/categories.html" %}
+            </div>
+            <div class="search-posts">
+                {% include "core/searchbar.html" %}
+                <div class="posts">
+                    <ul class="posts-list">
+                        {% for product in products %} <!-- TODO: rename variable for backend -->
+                            <div class="post-inner">
+                                <div class="post-photo">
+                                    <a href="">{{ posts|default:"error loading post image" }}<img> <!-- TODO: image parse --> </a>
+                                </div>
+                                <div>
+                                    <div class="post-header">
+                                        <a href="{% url 'products:product' product.category.slug product.slug %}"><h3>{{ product.title }}</h3></a>
+                                    </div>
+                                    <div class="post-short-desc">
+                                        <div class="post-price">
+                                            {{ product.price |default:"error loading post price" }} ₽
+                                        </div>
+                                        <div class="post-location">
+                                        </div>
+                                        <div class="post-data">
+                                            {{ product.add_date |default:"error loading post data" }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

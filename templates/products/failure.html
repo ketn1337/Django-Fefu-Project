@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% block content %}
+  <div class="main-block">
+      <div class="payment-block">
+          <div class="payment-anno">
+              Недостаточно средств
+          </div>
+          <a href={% url 'users:profile' request.user.username %} class="comeback-link">
+              Вернуться назад
+          </a>
+      </div>
+  </div>
+{% endblock %}

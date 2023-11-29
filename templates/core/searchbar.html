@@ -1,0 +1,8 @@
+{% block content %}
+    <div class="search-bar">
+        <form action="{%url 'products:search' %}" method="get">
+            <input type="text" name="query" class="main-search" placeholder="Провести поиск по сайту..." autocomplete="off" spellcheck="false" value={{query}} >
+            <button class="search-button"><img>Поиск</button> <!-- TODO: add lupa image -->
+        </form>
+    </div>
+{% endblock %}
