@@ -4,50 +4,48 @@
         <div class="nav-profile">
             <div>
                 <div id="avatar-photo">
+                    {{ users.image }}
                 </div>
                 <div id="name"> <!-- username-->
-                    Login: &nbsp; {{ request.user.username }}
+                    Логин: &nbsp; {{ request.user.username }}
                 </div>
                 <!-- first_name-->
                 <div id="city-id">
-                    First_Name: &nbsp; {{request.user.first_name}}
+                    Имя: &nbsp; {{request.user.first_name}}
                 </div>
                 <div id="city-id">
-                    Last_Name: &nbsp; {{request.user.last_name}}
-
+                    Фамилия: &nbsp; {{request.user.last_name}}
                 </div>
                 <div id="city-id">
                     Баланс: &nbsp; {{request.user.balance}}руб.
-
                 </div>
             </div>
             <ul id="advertisement-info">
                 <li>
                     <ul class="category">
-                        <li>
-                            <b>Мои объявления</b>
-                        </li>
-                        <li>
-                            <a href="{% url "users:create_product" request.user.username %}?next={{request.path}}"><b>Добавить товар</b></a>
+                        <li class="profile-settings">
+                            <a href="{% url "users:create_product" request.user.username %}?next={{request.path}}" class="profile-links">Добавить товар</a>
                         </li>
                         <li class="profile-settings">
                             Архив
                         </li>
                         <li class="profile-settings">
-                            Все объявления
+                            <a href="{% url 'products:search' %}" class="profile-links">
+                                Все объявления
+                            </a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <ul class="category">
-                        <li>
-                            <a href="{% url "users:profile" request.user.username %}"><b>Мой профиль</b></a>
+                        <li class="profile-settings">
+                            <a href="{% url "users:profile" request.user.username %} class="profile-links"">Мой профиль</a>
                         </li>
                         <li class="profile-settings">
                             Настройки профиля
                         </li>
-                        <li>
-                            <a href="{% url 'users:logout'%}"><h3>Log out</h3></a>
+                        <li class="profile-settings">
+                            <a href="{% url 'users:logout'%}" class="profile-links">Выйти из профиля</a>
                         </li>
                     </ul>
                 </li>
@@ -55,37 +53,48 @@
         </div>
         <div class="advertisement">
             <div id="advertisement-header">
-                {% if products %}
                 <b>Объявления</b>
-                {% for product in products %}
-                    <div class="ad">
-                    <div>
-                        <div id="ad-date">  
-                            {{product.add_date}}
-                        </div>
-                        <div id="ad-name">
-                            {{product.title}}
-                        </div>
-                    </div>
-                    <div class="ad-info-with-photo">
-                        <div class="ad-info">
-                            <div id="price">
-                                {{product.price}}  руб.
-                            </div>
-                            <div id="description">
-                                 {{product.description}}
-
-                            </div>
-                        </div>
-                        <div class="ad-photo-dir">
-                            <div id="ad-photo">
-                                product_photo
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
+            </div>
+            {% if !products %}
+                <div class="ad-button">
+                    <span id="is-advertisement">
+                        Объявлений нет
+                    </span>
+                    <form action="{% url 'users:create_product' request.user.username %}">
+                        <button class="universal-button">
+                            Создать
+                        </button>
+                    </form>
                 </div>
-
+            {% else %}
+                {% for product in products %}
+                    <form action="{% url 'products:product' product.category.slug product.slug %}" class="ad-form">
+                        <button class="ad">
+                            <div id="ad-date">  
+                                {{product.add_date}}
+                            </div>
+                            <div id="ad-name">
+                                {{product.title}}
+                            </div>
+                            <div class="ad-info-with-photo">
+                                <div class="ad-info">
+                                    <div id="price">
+                                        {{product.price}}  руб.
+                                    </div>
+                                    <div id="description">
+                                        {{product.description}}
+                                    </div>
+                                </div>
+                                <div class="ad-photo-dir">
+                                    <div id="ad-photo">
+                                        {{product.image}}
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
